@@ -1,0 +1,20 @@
+{
+  "name": "protractor-react-selector",
+  "version": "1.0.1",
+  "description": "React Locator Selector for Protractor",
+  "main": "./dist/index.js",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "keywords": [],
+  "author": "Abhinaba Ghosh <askabhinaba@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "resq": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "typescript": "^3.6.4",
+    "protractor": "^5.4.2"
+  }
+}
