@@ -31,40 +31,19 @@ exports.config = {
 };
 ```
 
-**proptractor-react-selector** needs a special resq script to be loaded beforehand. There are two ways to load the react selector script -
-
-1. If you are testing a SPA (single page application), where you do not encounter any in-between page reload/ server refresh, you can load the script in the **onPageLoad()** section in your protractor configuration. You can also load the script after you log in the app. It just have to be a one time setup for SPA.
-
-```ts
-import {loadReactSelector} from 'protractor-react-selector';
-
-exports.config = {
-  // ... the rest of your config
-  plugins: [
-    {
-      // The module name
-      package: "protractor-react-selector"
-    }
-  ]
-  // ... rest things
-
-  onPageLoad: async()=>{
-    await loadReactSelector();
-  }
-};
-```
-
-2. If you are testing a legacy application, where in-between page reload/ full reload navigation happens, you need to load the react selector script after each page reload.
+**proptractor-react-selector** needs a special resq script to be loaded beforehand.
 
 ```ts
 import { loadReactSelector } from "protractor-react-selector";
 
-const testDemo = async () => {
-  await element(by.css("button")).click();
-  // assume full page reload happens here...
-  await loadReactSelector(); // you need to again load the script
-};
+await loadReactSelector(); // you need to again load the script
 ```
+
+**Note:**
+
+1. If you are testing modern SPA, where full page reload happens only once, you can call loadReactSelector() only once in your configuration file (onPrepare/ onPageLoad).
+
+2. If you are testing an application where intermitten full page load (window refresh) happens, you need to call loadReactSelector() after each page load.
 
 ### Using React Selector
 
@@ -78,6 +57,11 @@ Once you are set with the configuration, you can use the react selector just lik
 - root element - optional
 
 ```ts
+import { loadReactSelector } from "protractor-react-selector";
+
+// load the react selector before using ReactSelecrtor locator. For SPA , it will be one time activity.
+await loadReactSelector();
+
 // with only component. If you dont provide any root, it assume that root is set to '#root'
 const loginButton = element(by.ReactSelector("button"));
 
