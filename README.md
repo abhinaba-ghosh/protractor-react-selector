@@ -1,5 +1,9 @@
 ## What can it do?
 
+ReactJS is one of the most widely use Front-End libraries in the web. Along side React, many developers use styling tools that will minify or re-write the class attribute values attached to the HTML elements via className props in JSX. These minifications and overwrites make it difficult to select the generated HTML using the WebDriver's query commands like findElement or findElements since it's not guaranteed that the class name will remain the same.
+
+Worry Not! Here We Intoduce Protractor-React-Selector :hatching_chick:
+
 _protractor-react-selector_ is lightweight plugin to help you to locate web elements in your REACT app using props and states.
 
 ## Installation
@@ -8,7 +12,6 @@ Install this module locally with the following command to be used as a (dev-)dep
 
 ```shell
 npm install --save protractor-react-selector
-npm install --save-dev protractor-react-selector
 ```
 
 ## Usage
@@ -30,20 +33,6 @@ exports.config = {
   ]
 };
 ```
-
-**proptractor-react-selector** needs a special resq script to be loaded beforehand.
-
-```ts
-import { loadReactSelector } from "protractor-react-selector";
-
-await loadReactSelector(); // you need to again load the script
-```
-
-**Note:**
-
-1. If you are testing modern SPA, where full page reload happens only once, you can call loadReactSelector() only once in your configuration file (onPrepare/ onPageLoad).
-
-2. If you are testing an application where intermitten full page load (window refresh) happens, you need to call loadReactSelector() after each page load.
 
 ### Using React Selector
 
@@ -79,9 +68,7 @@ const loginButton = element.all(by.ReactSelector("button"));
 
 ## Dont Forget:
 
-1. React selector script (loadReactSelector()) should be loaded first before you use by.ReactSelector
-
-2. Target Element should be visible before your script try to find the element by reactSelector. Page should be testable. Otherwise it will throw react instance not found.
+Target Element should be visible before your script try to find the element by reactSelector. You need to wait for the page to load completely before you start calling the react slector. Otherwise it will throw react instance not found.
 
 ## Tell me your issues
 
@@ -89,6 +76,8 @@ you can raise any issue [here](https://github.com/abhinaba1080/protractor-react-
 
 ## Contribution
 
-Any pull request is welcome keeping proper code structure.
+Any pull request is welcome.
+
+If it works for you , give a [Star](https://github.com/abhinaba1080/protractor-react-selector)! :star2: :star: :star2:
 
 _- Copyright &copy; 2019- [Abhinaba Ghosh](https://www.linkedin.com/in/abhinaba-ghosh-9a2ab8a0/)_
