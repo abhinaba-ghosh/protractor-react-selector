@@ -2,7 +2,7 @@
 
 ReactJS is one of the most widely use Front-End libraries in the web. Along side React, many developers use styling tools that will minify or re-write the class attribute values attached to the HTML elements via className props in JSX. These minifications and overwrites make it difficult to select the generated HTML using the WebDriver's query commands like findElement or findElements since it's not guaranteed that the class name will remain the same.
 
-Worry Not! Here We Intoduce Protractor-React-Selector :hatching_chick:
+Worry Not! Here We Intoduce **Protractor-React-Selector** :hatching_chick:
 
 _protractor-react-selector_ is lightweight plugin to help you to locate web elements in your REACT app using props and states.
 
@@ -46,11 +46,6 @@ Once you are set with the configuration, you can use the react selector just lik
 - root element - optional
 
 ```ts
-import { loadReactSelector } from "protractor-react-selector";
-
-// load the react selector before using ReactSelecrtor locator. For SPA , it will be one time activity.
-await loadReactSelector();
-
 // with only component. If you dont provide any root, it assume that root is set to '#root'
 const loginButton = element(by.ReactSelector("button"));
 
