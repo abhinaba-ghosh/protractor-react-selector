@@ -1,6 +1,6 @@
 {
   "name": "protractor-react-selector",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React Locator Selector for Protractor",
   "main": "./dist/index.js",
   "scripts": {

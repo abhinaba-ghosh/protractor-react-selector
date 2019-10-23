@@ -22,5 +22,3 @@ declare module "protractor/built/locators" {
     ): Locator;
   }
 }
-
-export * from "protractor";
