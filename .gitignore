@@ -2,6 +2,7 @@ node_modules
 *.log
 test
 .vscode
+src
 
 # Build artifacts
 .nyc_output
