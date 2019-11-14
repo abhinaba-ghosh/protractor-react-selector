@@ -6,6 +6,8 @@ Worry Not! Here We Intoduce **Protractor-React-Selector** :hatching_chick:
 
 _protractor-react-selector_ is lightweight plugin to help you to locate web elements in your REACT app using props and states.
 
+Read The complete Blog [here](https://medium.com/@abhinabaghosh.1994/test-your-react-app-efficiently-with-protractor-b8406db9148f)
+
 ## Installation
 
 Install this module locally with the following command to be used as a (dev-)dependency:
@@ -16,7 +18,7 @@ npm install --save protractor-react-selector
 
 ## Usage
 
-> **_protractor-react-selector_ supports NodeJS 8 or higher**
+> **_protractor-react-selector_ supports NodeJS 8 or higher** > **_Support added for IE, Chrome, Firefox, Safari_**
 
 ### Configuration
 
@@ -38,12 +40,12 @@ exports.config = {
 
 Once you are set with the configuration, you can use the react selector just like any other native locatos.
 
-> Format: **by.ReactSelector('react component','props','state','react root element')**
+> Format: **by.ReactSelector(react_component_name,props,state,react_root_element)**
 
-- component name - mandatory
-- props - optional
-- state - optional
-- root element - optional
+- component_name : string - required
+- props : JSON OBJ - optional
+- state : JSON OBJ - optional
+- react_root_element : string - optional
 
 ```ts
 // with only component. If you dont provide any root, it assume that root is set to '#root'
@@ -60,6 +62,10 @@ const loginButton = element(
 // array finder
 const loginButton = element.all(by.ReactSelector("button"));
 ```
+
+## Tool You Need
+
+[React-Dev-Tool](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) — You can inspect the DOM element by simply pressing the f12. But, to inspect REACT components and props, you need to install the chrome plugin.
 
 ## Dont Forget:
 
