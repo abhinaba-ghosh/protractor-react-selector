@@ -17,469 +17,206 @@ exports.onPrepare = function() {
             r[k] = a[j];
         return r;
       };
-    var s = function ownKeys(object, enumerableOnly) {
-      var keys = Object.keys(object);
-      if (Object.getOwnPropertySymbols) {
-        var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly)
-          symbols = symbols.filter(function(sym) {
-            return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          });
-        keys.push.apply(keys, symbols);
-      }
-      return keys;
-    };
 
-    function _objectSpread(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i] != null ? arguments[i] : {};
-        if (i % 2) {
-          ownKeys(source, true).forEach(function(key) {
-            _defineProperty(target, key, source[key]);
-          });
-        } else if (Object.getOwnPropertyDescriptors) {
-          Object.defineProperties(
-            target,
-            Object.getOwnPropertyDescriptors(source)
-          );
-        } else {
-          ownKeys(source).forEach(function(key) {
-            Object.defineProperty(
-              target,
-              key,
-              Object.getOwnPropertyDescriptor(source, key)
-            );
-          });
-        }
-      }
-      return target;
-    }
-
-    function _defineProperty(obj, key, value) {
-      if (key in obj) {
-        Object.defineProperty(obj, key, {
-          value: value,
-          enumerable: true,
-          configurable: true,
-          writable: true
-        });
-      } else {
-        obj[key] = value;
-      }
-      return obj;
-    }
-
-    function _typeof2(obj) {
-      if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-        _typeof2 = function _typeof2(obj) {
-          return typeof obj;
-        };
-      } else {
-        _typeof2 = function _typeof2(obj) {
-          return obj &&
-            typeof Symbol === "function" &&
-            obj.constructor === Symbol &&
-            obj !== Symbol.prototype
-            ? "symbol"
-            : typeof obj;
-        };
-      }
-      return _typeof2(obj);
-    }
-
-    function _instanceof2(left, right) {
-      if (
-        right != null &&
-        typeof Symbol !== "undefined" &&
-        right[Symbol.hasInstance]
-      ) {
-        return !!right[Symbol.hasInstance](left);
-      } else {
-        return left instanceof right;
-      }
-    }
-
-    function _classCallCheck(instance, Constructor) {
-      if (!_instanceof(instance, Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-      }
-    }
-
-    function _defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    function _createClass(Constructor, protoProps, staticProps) {
-      if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) _defineProperties(Constructor, staticProps);
-      return Constructor;
-    }
-
-    function _possibleConstructorReturn(self, call) {
-      if (call && (_typeof(call) === "object" || typeof call === "function")) {
-        return call;
-      }
-
-      return _assertThisInitialized(self);
-    }
-
-    function _assertThisInitialized(self) {
-      if (self === void 0) {
-        throw new ReferenceError(
-          "this hasn't been initialised - super() hasn't been called"
-        );
-      }
-
-      return self;
-    }
-
-    function _inherits(subClass, superClass) {
-      if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError(
-          "Super expression must either be null or a function"
-        );
-      }
-
-      subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-          value: subClass,
-          writable: true,
-          configurable: true
-        }
-      });
-      if (superClass) _setPrototypeOf(subClass, superClass);
-    }
-
-    function _wrapNativeSuper(Class) {
-      var _cache = typeof Map === "function" ? new Map() : undefined;
-
-      _wrapNativeSuper = function _wrapNativeSuper(Class) {
-        if (Class === null || !_isNativeFunction(Class)) return Class;
-
-        if (typeof Class !== "function") {
-          throw new TypeError(
-            "Super expression must either be null or a function"
-          );
-        }
-
-        if (typeof _cache !== "undefined") {
-          if (_cache.has(Class)) return _cache.get(Class);
-
-          _cache.set(Class, Wrapper);
-        }
-
-        function Wrapper() {
-          return _construct(
-            Class,
-            arguments,
-            _getPrototypeOf(this).constructor
-          );
-        }
-
-        Wrapper.prototype = Object.create(Class.prototype, {
-          constructor: {
-            value: Wrapper,
-            enumerable: false,
-            writable: true,
-            configurable: true
-          }
-        });
-        return _setPrototypeOf(Wrapper, Class);
-      };
-
-      return _wrapNativeSuper(Class);
-    }
-
-    function isNativeReflectConstruct() {
-      if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-      if (Reflect.construct.sham) return false;
-      if (typeof Proxy === "function") return true;
-
-      try {
-        Date.prototype.toString.call(
-          Reflect.construct(Date, [], function() {})
-        );
-        return true;
-      } catch (e) {
-        return false;
-      }
-    }
-
-    function _construct(Parent, args, Class) {
-      if (isNativeReflectConstruct()) {
-        _construct = Reflect.construct;
-      } else {
-        _construct = function _construct(Parent, args, Class) {
-          var a = [null];
-          a.push.apply(a, args);
-          var Constructor = Function.bind.apply(Parent, a);
-          var instance = new Constructor();
-          if (Class) _setPrototypeOf(instance, Class.prototype);
-          return instance;
-        };
-      }
-
-      return _construct.apply(null, arguments);
-    }
-
-    function _isNativeFunction(fn) {
-      return Function.toString.call(fn).indexOf("[native code]") !== -1;
-    }
-
-    function _setPrototypeOf(o, p) {
-      _setPrototypeOf =
-        Object.setPrototypeOf ||
-        function _setPrototypeOf(o, p) {
-          o.__proto__ = p;
-          return o;
-        };
-
-      return _setPrototypeOf(o, p);
-    }
-
-    function _getPrototypeOf(o) {
-      _getPrototypeOf = Object.setPrototypeOf
-        ? Object.getPrototypeOf
-        : function _getPrototypeOf(o) {
-            return o.__proto__ || Object.getPrototypeOf(o);
-          };
-      return _getPrototypeOf(o);
-    }
-
-    function _toConsumableArray(arr) {
-      return (
-        _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread()
-      );
-    }
-
-    function _nonIterableSpread() {
-      throw new TypeError("Invalid attempt to spread non-iterable instance");
-    }
-
-    function _iterableToArray(iter) {
-      if (
-        Symbol.iterator in Object(iter) ||
-        Object.prototype.toString.call(iter) === "[object Arguments]"
-      )
-        return Array.from(iter);
-    }
-
-    function _arrayWithoutHoles(arr) {
-      if (Array.isArray(arr)) {
-        for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-          arr2[i] = arr[i];
-        }
-
-        return arr2;
-      }
-    }
-
-    function _instanceof(left, right) {
-      if (
-        right != null &&
-        typeof Symbol !== "undefined" &&
-        right[Symbol.hasInstance]
-      ) {
-        return !!right[Symbol.hasInstance](left);
-      } else {
-        return _instanceof2(left, right);
-      }
-    }
-
-    function _typeof(obj) {
-      if (
-        typeof Symbol === "function" &&
-        _typeof2(Symbol.iterator) === "symbol"
-      ) {
-        _typeof = function _typeof(obj) {
-          return _typeof2(obj);
-        };
-      } else {
-        _typeof = function _typeof(obj) {
-          return obj &&
-            typeof Symbol === "function" &&
-            obj.constructor === Symbol &&
-            obj !== Symbol.prototype
-            ? "symbol"
-            : _typeof2(obj);
-        };
-      }
-
-      return _typeof(obj);
-    }
-
-    !(function(t, e) {
-      "object" ==
-        (typeof exports === "undefined" ? "undefined" : _typeof(exports)) &&
-      "object" ==
-        (typeof module === "undefined" ? "undefined" : _typeof(module))
-        ? (module.exports = e())
+    var s = !(function(t, n) {
+      "object" == typeof exports && "object" == typeof module
+        ? (module.exports = n())
         : "function" == typeof define && define.amd
-        ? define([], e)
-        : "object" ==
-          (typeof exports === "undefined" ? "undefined" : _typeof(exports))
-        ? (exports.resq = e())
-        : ((t.window = t.window || {}), (t.window.resq = e()));
+        ? define([], n)
+        : "object" == typeof exports
+        ? (exports.resq = n())
+        : ((t.window = t.window || {}), (t.window.resq = n()));
     })(window, function() {
       return (function(t) {
-        var e = {};
-
-        function n(r) {
-          if (e[r]) return e[r].exports;
-          var o = (e[r] = {
-            i: r,
-            l: !1,
-            exports: {}
-          });
-          return t[r].call(o.exports, o, o.exports, n), (o.l = !0), o.exports;
+        var n = {};
+        function e(r) {
+          if (n[r]) return n[r].exports;
+          var o = (n[r] = { i: r, l: !1, exports: {} });
+          return t[r].call(o.exports, o, o.exports, e), (o.l = !0), o.exports;
         }
-
         return (
-          (n.m = t),
-          (n.c = e),
-          (n.d = function(t, e, r) {
-            n.o(t, e) ||
-              Object.defineProperty(t, e, {
-                enumerable: !0,
-                get: r
-              });
+          (e.m = t),
+          (e.c = n),
+          (e.d = function(t, n, r) {
+            e.o(t, n) ||
+              Object.defineProperty(t, n, { enumerable: !0, get: r });
           }),
-          (n.r = function(t) {
+          (e.r = function(t) {
             "undefined" != typeof Symbol &&
               Symbol.toStringTag &&
-              Object.defineProperty(t, Symbol.toStringTag, {
-                value: "Module"
-              }),
-              Object.defineProperty(t, "__esModule", {
-                value: !0
-              });
+              Object.defineProperty(t, Symbol.toStringTag, { value: "Module" }),
+              Object.defineProperty(t, "__esModule", { value: !0 });
           }),
-          (n.t = function(t, e) {
-            if ((1 & e && (t = n(t)), 8 & e)) return t;
-            if (4 & e && "object" == _typeof(t) && t && t.__esModule) return t;
+          (e.t = function(t, n) {
+            if ((1 & n && (t = e(t)), 8 & n)) return t;
+            if (4 & n && "object" == typeof t && t && t.__esModule) return t;
             var r = Object.create(null);
             if (
-              (n.r(r),
-              Object.defineProperty(r, "default", {
-                enumerable: !0,
-                value: t
-              }),
-              2 & e && "string" != typeof t)
+              (e.r(r),
+              Object.defineProperty(r, "default", { enumerable: !0, value: t }),
+              2 & n && "string" != typeof t)
             )
-              for (var o in t) {
-                n.d(
+              for (var o in t)
+                e.d(
                   r,
                   o,
-                  function(e) {
-                    return t[e];
+                  function(n) {
+                    return t[n];
                   }.bind(null, o)
                 );
-              }
             return r;
           }),
-          (n.n = function(t) {
-            var e =
+          (e.n = function(t) {
+            var n =
               t && t.__esModule
                 ? function() {
-                    return t["default"];
+                    return t.default;
                   }
                 : function() {
                     return t;
                   };
-            return n.d(e, "a", e), e;
+            return e.d(n, "a", n), n;
           }),
-          (n.o = function(t, e) {
-            return Object.prototype.hasOwnProperty.call(t, e);
+          (e.o = function(t, n) {
+            return Object.prototype.hasOwnProperty.call(t, n);
           }),
-          (n.p = ""),
-          n((n.s = 5))
+          (e.p = ""),
+          e((e.s = 15))
         );
       })([
-        function(t, e, n) {
+        function(t, n, e) {
           "use strict";
-
-          n.d(e, "a", function() {
-            return d;
+          e.d(n, "a", function() {
+            return w;
           }),
-            n.d(e, "d", function() {
-              return h;
+            e.d(n, "d", function() {
+              return P;
             }),
-            n.d(e, "b", function() {
-              return y;
+            e.d(n, "b", function() {
+              return S;
             }),
-            n.d(e, "c", function() {
-              return b;
+            e.d(n, "c", function() {
+              return _;
             });
-          var r = n(4),
-            o = n.n(r);
-          var i = Array.isArray,
-            c = Object.keys;
-
-          function u(t) {
+          var r = e(1),
+            o = e.n(r),
+            i = e(13),
+            u = e.n(i),
+            c = e(2),
+            f = e.n(c),
+            a = e(14),
+            s = e.n(a);
+          function l(t, n) {
+            var e = Object.keys(t);
+            if (Object.getOwnPropertySymbols) {
+              var r = Object.getOwnPropertySymbols(t);
+              n &&
+                (r = r.filter(function(n) {
+                  return Object.getOwnPropertyDescriptor(t, n).enumerable;
+                })),
+                e.push.apply(e, r);
+            }
+            return e;
+          }
+          var p = Array.isArray,
+            d = Object.keys;
+          function y(t) {
             return "function" == typeof t;
           }
-
-          function s(t) {
-            return _instanceof(t, HTMLElement) || _instanceof(t, Text);
+          function h(t) {
+            return t instanceof HTMLElement || t instanceof Text;
           }
-
-          function a(t) {
-            return "object" == _typeof(t) && !i(t);
+          function b(t) {
+            return "object" === f()(t) && !p(t);
           }
-
-          function f(t, e) {
-            var n =
-              arguments.length > 2 && arguments[2] !== undefined
-                ? arguments[2]
-                : !1;
+          function v(t) {
+            if (!t || "string" == typeof t) return t;
+            var n = (function(t) {
+              for (var n = 1; n < arguments.length; n++) {
+                var e = null != arguments[n] ? arguments[n] : {};
+                n % 2
+                  ? l(Object(e), !0).forEach(function(n) {
+                      u()(t, n, e[n]);
+                    })
+                  : Object.getOwnPropertyDescriptors
+                  ? Object.defineProperties(
+                      t,
+                      Object.getOwnPropertyDescriptors(e)
+                    )
+                  : l(Object(e)).forEach(function(n) {
+                      Object.defineProperty(
+                        t,
+                        n,
+                        Object.getOwnPropertyDescriptor(e, n)
+                      );
+                    });
+              }
+              return t;
+            })({}, t);
+            return delete n.children, n;
+          }
+          function g(t, n) {
+            var e =
+              arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
             return (
-              !(!i(t) || !i(e)) &&
-              (n
-                ? t.length === e.length &&
+              !(!p(t) || !p(n)) &&
+              (e
+                ? t.length === n.length &&
                   !t.find(function(t) {
-                    return !e.includes(t);
+                    return !n.includes(t);
                   })
                 : t.some(function(t) {
-                    return e.includes(t);
+                    return n.includes(t);
                   }))
             );
           }
-
-          function d(t) {
-            var e = {
-              children: []
-            };
+          function m() {
+            var t =
+                arguments.length > 0 && void 0 !== arguments[0]
+                  ? arguments[0]
+                  : {},
+              n =
+                arguments.length > 1 && void 0 !== arguments[1]
+                  ? arguments[1]
+                  : {},
+              e =
+                arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
+              r = [];
+            return (
+              !d(t).length ||
+              (e
+                ? s()(t, n)
+                : (d(t).forEach(function(e) {
+                    n.hasOwnProperty(e) &&
+                      (b(t[e]) && b(n[e]) && (r = r.concat(m(t[e], n[e]))),
+                      (t[e] === n[e] || g(t[e], n[e])) && r.push(n));
+                  }),
+                  !!r.filter(function(t) {
+                    return t;
+                  }).length))
+            );
+          }
+          function w(t) {
+            var n,
+              e = { children: [] };
             if (!t) return e;
-            var n;
-            (e.name = u((n = t.type)) ? n.name : n),
-              (e.props = (function(t) {
-                if (!t || "string" == typeof t) return t;
-
-                var e = _objectSpread({}, t);
-
-                return delete e.children, e;
-              })(t.memoizedProps)),
+            (e.name = y((n = t.type)) ? n.name : n),
+              (e.props = v(t.memoizedProps)),
               (e.state = (function(t) {
-                if (!t) return;
-                var e = t.baseState;
-                return e || t;
+                if (t) {
+                  var n = t.baseState;
+                  return n || t;
+                }
               })(t.memoizedState));
             var r = t.child;
             if (r)
-              for (e.children.push(r); r.sibling; ) {
+              for (e.children.push(r); r.sibling; )
                 e.children.push(r.sibling), (r = r.sibling);
-              }
             return (
               (e.children = e.children.map(function(t) {
-                return d(t);
+                return w(t);
               })),
-              u(t.type) &&
+              y(t.type) &&
               (function(t) {
                 return t.children.length > 1;
               })(e)
@@ -494,28 +231,53 @@ exports.onPrepare = function() {
                   })(e)),
                   (e.isFragment = !0))
                 : (e.node = (function(t) {
-                    return s(t.stateNode)
+                    return h(t.stateNode)
                       ? t.stateNode
-                      : t.child && s(t.child.stateNode)
+                      : t.child && h(t.child.stateNode)
                       ? t.child.stateNode
                       : null;
                   })(t)),
               e
             );
           }
-
-          function l(t) {
+          function O(t) {
             for (; t.length; ) {
-              var _e = t.shift();
-
-              if (_e.node) return _e.node;
-              _e.children &&
-                Array.isArray(_e.children) &&
-                t.push.apply(t, _toConsumableArray(_e.children));
+              var n = t.shift();
+              if (n.node) return n.node;
+              n.children &&
+                Array.isArray(n.children) &&
+                t.push.apply(t, o()(n.children));
             }
           }
-
-          function p(t, e) {
+          function j(t, n) {
+            for (var e = []; t.length; ) {
+              var r = t.shift().children;
+              r &&
+                Array.isArray(r) &&
+                r.forEach(function(r) {
+                  n(r) &&
+                    (!r.node &&
+                      Array.isArray(r.children) &&
+                      (r.node = O(r.children.concat([]))),
+                    e.push(r)),
+                    t.push(r);
+                });
+            }
+            return e;
+          }
+          function x(t, n) {
+            var e = (function(t) {
+              if (t) {
+                var n = t.split("(");
+                return 1 === n.length
+                  ? t
+                  : n
+                      .find(function(t) {
+                        return t.includes(")");
+                      })
+                      .replace(/\)*/g, "");
+              }
+            })(n);
             return new RegExp(
               "^" +
                 t
@@ -527,439 +289,534 @@ exports.onPrepare = function() {
                 "$"
             ).test(e);
           }
-
-          function h(t, e) {
-            var n =
-              arguments.length > 2 && arguments[2] !== undefined
-                ? arguments[2]
-                : !1;
-            var r = arguments.length > 3 ? arguments[3] : undefined;
+          function P(t, n) {
+            arguments.length > 2 && void 0 !== arguments[2] && arguments[2];
+            var e = arguments.length > 3 ? arguments[3] : void 0;
             return t.reduce(
-              function(t, e) {
+              function(t, n) {
                 return t.concat(
-                  (function(t, e) {
-                    var n = [];
-
-                    for (; t.length; ) {
-                      var _t$shift = t.shift(),
-                        _r = _t$shift.children;
-
-                      _r &&
-                        Array.isArray(_r) &&
-                        _r.forEach(function(r) {
-                          e(r) &&
-                            (!r.node &&
-                              Array.isArray(r.children) &&
-                              (r.node = l(r.children.concat([]))),
-                            n.push(r)),
-                            t.push(r);
-                        });
-                    }
-
-                    return n;
-                  })(
+                  j(
                     t,
-                    r && "function" == typeof r
-                      ? r
+                    e && "function" == typeof e
+                      ? e
                       : function(t) {
                           return "string" == typeof t.name
-                            ? p(e, t.name)
+                            ? x(n, t.name)
                             : null !== t.name &&
-                                "object" == _typeof(t.name) &&
-                                p(e, t.name.displayName);
+                                "object" === f()(t.name) &&
+                                x(n, t.name.displayName);
                         }
                   )
                 );
               },
-              [e]
+              [n]
             );
           }
-
-          function y(t, e, n) {
+          function S(t, n, e) {
             var r =
-              arguments.length > 3 && arguments[3] !== undefined
-                ? arguments[3]
-                : !1;
-            return u(n)
+              arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
+            return y(e)
               ? (console.warn("Functions are not supported as filter matchers"),
                 [])
               : t.filter(function(t) {
                   return (
-                    (a(n) &&
-                      (function t() {
-                        var e =
-                          arguments.length > 0 && arguments[0] !== undefined
-                            ? arguments[0]
-                            : {};
-                        var n =
-                          arguments.length > 1 && arguments[1] !== undefined
-                            ? arguments[1]
-                            : {};
-                        var r =
-                          arguments.length > 2 && arguments[2] !== undefined
-                            ? arguments[2]
-                            : !1;
-                        var i = [];
-                        return (
-                          !c(e).length ||
-                          (r
-                            ? o()(e, n)
-                            : (c(e).forEach(function(r) {
-                                n.hasOwnProperty(r) &&
-                                  (a(e[r]) &&
-                                    a(n[r]) &&
-                                    (i = i.concat(t(e[r], n[r]))),
-                                  (e[r] === n[r] || f(e[r], n[r])) &&
-                                    i.push(n));
-                              }),
-                              !!i.filter(function(t) {
-                                return t;
-                              }).length))
-                        );
-                      })(n, t[e], r)) ||
-                    (i(n) && f(n, t[e], r)) ||
-                    t[e] === n
+                    (b(e) && m(e, t[n], r)) ||
+                    (p(e) && g(e, t[n], r)) ||
+                    t[n] === e
                   );
                 });
           }
-
-          function b(t) {
+          function _(t) {
             if (t.hasOwnProperty("_reactRootContainer"))
               return t._reactRootContainer._internalRoot.current;
-            var e = Object.keys(t).find(function(t) {
+            var n = Object.keys(t).find(function(t) {
               return t.startsWith("__reactInternalInstance");
             });
-            return e ? t[e] : void 0;
+            return n ? t[n] : void 0;
           }
         },
-        function(t, e) {
-          var n;
-
-          n = (function() {
+        function(t, n, e) {
+          var r = e(16),
+            o = e(17),
+            i = e(18);
+          t.exports = function(t) {
+            return r(t) || o(t) || i();
+          };
+        },
+        function(t, n) {
+          function e(n) {
+            return (
+              "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+                ? (t.exports = e = function(t) {
+                    return typeof t;
+                  })
+                : (t.exports = e = function(t) {
+                    return t &&
+                      "function" == typeof Symbol &&
+                      t.constructor === Symbol &&
+                      t !== Symbol.prototype
+                      ? "symbol"
+                      : typeof t;
+                  }),
+              e(n)
+            );
+          }
+          t.exports = e;
+        },
+        function(t, n) {
+          function e(n) {
+            return (
+              (t.exports = e = Object.setPrototypeOf
+                ? Object.getPrototypeOf
+                : function(t) {
+                    return t.__proto__ || Object.getPrototypeOf(t);
+                  }),
+              e(n)
+            );
+          }
+          t.exports = e;
+        },
+        function(t, n) {
+          t.exports = function(t, n) {
+            if (!(t instanceof n))
+              throw new TypeError("Cannot call a class as a function");
+          };
+        },
+        function(t, n) {
+          function e(t, n) {
+            for (var e = 0; e < n.length; e++) {
+              var r = n[e];
+              (r.enumerable = r.enumerable || !1),
+                (r.configurable = !0),
+                "value" in r && (r.writable = !0),
+                Object.defineProperty(t, r.key, r);
+            }
+          }
+          t.exports = function(t, n, r) {
+            return n && e(t.prototype, n), r && e(t, r), t;
+          };
+        },
+        function(t, n) {
+          function e(n, r) {
+            return (
+              (t.exports = e =
+                Object.setPrototypeOf ||
+                function(t, n) {
+                  return (t.__proto__ = n), t;
+                }),
+              e(n, r)
+            );
+          }
+          t.exports = e;
+        },
+        function(t, n, e) {
+          var r = e(2),
+            o = e(19);
+          t.exports = function(t, n) {
+            return !n || ("object" !== r(n) && "function" != typeof n)
+              ? o(t)
+              : n;
+          };
+        },
+        function(t, n, e) {
+          var r = e(6);
+          t.exports = function(t, n) {
+            if ("function" != typeof n && null !== n)
+              throw new TypeError(
+                "Super expression must either be null or a function"
+              );
+            (t.prototype = Object.create(n && n.prototype, {
+              constructor: { value: t, writable: !0, configurable: !0 }
+            })),
+              n && r(t, n);
+          };
+        },
+        function(t, n, e) {
+          var r = e(3),
+            o = e(6),
+            i = e(20),
+            u = e(21);
+          function c(n) {
+            var e = "function" == typeof Map ? new Map() : void 0;
+            return (
+              (t.exports = c = function(t) {
+                if (null === t || !i(t)) return t;
+                if ("function" != typeof t)
+                  throw new TypeError(
+                    "Super expression must either be null or a function"
+                  );
+                if (void 0 !== e) {
+                  if (e.has(t)) return e.get(t);
+                  e.set(t, n);
+                }
+                function n() {
+                  return u(t, arguments, r(this).constructor);
+                }
+                return (
+                  (n.prototype = Object.create(t.prototype, {
+                    constructor: {
+                      value: n,
+                      enumerable: !1,
+                      writable: !0,
+                      configurable: !0
+                    }
+                  })),
+                  o(n, t)
+                );
+              }),
+              c(n)
+            );
+          }
+          t.exports = c;
+        },
+        function(t, n) {
+          var e;
+          e = (function() {
             return this;
           })();
-
           try {
-            n = n || new Function("return this")();
+            e = e || new Function("return this")();
           } catch (t) {
-            "object" ==
-              (typeof window === "undefined" ? "undefined" : _typeof(window)) &&
-              (n = window);
+            "object" == typeof window && (e = window);
           }
-
-          t.exports = n;
+          t.exports = e;
         },
-        function(t, e, n) {
+        function(t, n, e) {
           "use strict";
-
           (function(t) {
-            n.d(e, "a", function() {
+            e.d(n, "a", function() {
               return o;
             });
-            var r = n(0);
-
+            var r = e(0);
             function o() {
-              var e =
-                arguments.length > 0 && arguments[0] !== undefined
-                  ? arguments[0]
-                  : 5e3;
-              var n = arguments.length > 1 ? arguments[1] : undefined;
+              var n =
+                  arguments.length > 0 && void 0 !== arguments[0]
+                    ? arguments[0]
+                    : 5e3,
+                e = arguments.length > 1 ? arguments[1] : void 0;
               if (t.isReactLoaded)
                 return Promise.resolve("React already loaded");
-              return new Promise(function(o, i) {
-                var c = !1;
-
-                var u = function u() {
-                  var e = (function() {
-                    var t = document.createTreeWalker(document);
-                    if (n) return document.querySelector(n);
-
-                    for (; t.nextNode(); ) {
-                      if (t.currentNode.hasOwnProperty("_reactRootContainer"))
-                        return t.currentNode;
-                    }
-                  })();
-
-                  if (e)
+              var o = function() {
+                var t = document.createTreeWalker(document);
+                if (e) return document.querySelector(e);
+                for (; t.nextNode(); )
+                  if (t.currentNode.hasOwnProperty("_reactRootContainer"))
+                    return t.currentNode;
+              };
+              return new Promise(function(e, i) {
+                var u = !1;
+                !(function n() {
+                  var i = o();
+                  if (i)
                     return (
                       (t.isReactLoaded = !0),
-                      (t.rootReactElement = Object(r.c)(e)),
-                      o()
+                      (t.rootReactElement = Object(r.c)(i)),
+                      e()
                     );
-                  c || setTimeout(u, 200);
-                };
-
-                u(),
+                  u || setTimeout(n, 200);
+                })(),
                   setTimeout(function() {
-                    (c = !0), i("Timed out");
-                  }, e);
+                    (u = !0), i("Timed out");
+                  }, n);
               });
             }
-          }.call(this, n(1)));
+          }.call(this, e(10)));
         },
-        function(t, e, n) {
+        function(t, n, e) {
           "use strict";
-
-          n.d(e, "a", function() {
-            return c;
+          e.d(n, "a", function() {
+            return w;
           });
-          var r = n(0);
-
-          var o =
-            /*#__PURE__*/
-            (function(_Array) {
-              _inherits(o, _Array);
-
-              function o(t) {
-                var _getPrototypeOf2;
-
-                var _this;
-
-                _classCallCheck(this, o);
-
-                t || (t = []),
-                  (_this = _possibleConstructorReturn(
-                    this,
-                    (_getPrototypeOf2 = _getPrototypeOf(o)).call.apply(
-                      _getPrototypeOf2,
-                      [this].concat(_toConsumableArray(t))
-                    )
-                  ));
-                return _this;
+          var r = e(1),
+            o = e.n(r),
+            i = e(4),
+            u = e.n(i),
+            c = e(5),
+            f = e.n(c),
+            a = e(7),
+            s = e.n(a),
+            l = e(3),
+            p = e.n(l),
+            d = e(8),
+            y = e.n(d),
+            h = e(9),
+            b = e.n(h),
+            v = e(0),
+            g = (function(t) {
+              function n(t) {
+                var e;
+                return (
+                  u()(this, n),
+                  t || (t = []),
+                  s()(this, (e = p()(n)).call.apply(e, [this].concat(o()(t))))
+                );
               }
-
-              _createClass(o, [
-                {
-                  key: "byProps",
-                  value: function byProps(t) {
-                    var _ref =
-                        arguments.length > 1 && arguments[1] !== undefined
-                          ? arguments[1]
-                          : {
-                              exact: !1
-                            },
-                      e = _ref.exact;
-
-                    var n = Object(r.b)(this, "props", t, e);
-                    return new o(n);
+              return (
+                y()(n, t),
+                f()(n, [
+                  {
+                    key: "byProps",
+                    value: function(t) {
+                      var e =
+                          arguments.length > 1 && void 0 !== arguments[1]
+                            ? arguments[1]
+                            : { exact: !1 },
+                        r = e.exact,
+                        o = Object(v.b)(this, "props", t, r);
+                      return new n(o);
+                    }
+                  },
+                  {
+                    key: "byState",
+                    value: function(t) {
+                      var e =
+                          arguments.length > 1 && void 0 !== arguments[1]
+                            ? arguments[1]
+                            : { exact: !1 },
+                        r = e.exact,
+                        o = Object(v.b)(this, "state", t, r);
+                      return new n(o);
+                    }
                   }
-                },
-                {
-                  key: "byState",
-                  value: function byState(t) {
-                    var _ref2 =
-                        arguments.length > 1 && arguments[1] !== undefined
-                          ? arguments[1]
-                          : {
-                              exact: !1
-                            },
-                      e = _ref2.exact;
-
-                    var n = Object(r.b)(this, "state", t, e);
-                    return new o(n);
-                  }
-                }
-              ]);
-
-              return o;
-            })(_wrapNativeSuper(Array));
-
-          var i =
-            /*#__PURE__*/
-            (function(_Object) {
-              _inherits(i, _Object);
-
-              function i(t, e) {
-                var _this2;
-
-                _classCallCheck(this, i);
-
-                (_this2 = _possibleConstructorReturn(
-                  this,
-                  _getPrototypeOf(i).call(this, t)
-                )),
-                  (_this2._nodes = e);
-
-                for (var e in t) {
-                  _this2[e] = t[e];
-                }
-
-                return _this2;
+                ]),
+                n
+              );
+            })(b()(Array)),
+            m = (function(t) {
+              function n(t, e) {
+                var r;
+                for (var o in (u()(this, n),
+                ((r = s()(this, p()(n).call(this, t)))._nodes = e),
+                t))
+                  r[o] = t[o];
+                return r;
               }
-
-              _createClass(i, [
-                {
-                  key: "byProps",
-                  value: function byProps(t) {
-                    var _ref3 =
-                        arguments.length > 1 && arguments[1] !== undefined
-                          ? arguments[1]
-                          : {
-                              exact: !1
-                            },
-                      e = _ref3.exact;
-
-                    var n = Object(r.b)(this._nodes, "props", t, e)[0];
-                    return new i(n, this._nodes);
+              return (
+                y()(n, t),
+                f()(n, [
+                  {
+                    key: "byProps",
+                    value: function(t) {
+                      var e =
+                          arguments.length > 1 && void 0 !== arguments[1]
+                            ? arguments[1]
+                            : { exact: !1 },
+                        r = e.exact,
+                        o = Object(v.b)(this._nodes, "props", t, r)[0];
+                      return new n(o, this._nodes);
+                    }
+                  },
+                  {
+                    key: "byState",
+                    value: function(t) {
+                      var e =
+                          arguments.length > 1 && void 0 !== arguments[1]
+                            ? arguments[1]
+                            : { exact: !1 },
+                        r = e.exact,
+                        o = Object(v.b)(this._nodes, "state", t, r)[0];
+                      return new n(o, this._nodes);
+                    }
                   }
-                },
-                {
-                  key: "byState",
-                  value: function byState(t) {
-                    var _ref4 =
-                        arguments.length > 1 && arguments[1] !== undefined
-                          ? arguments[1]
-                          : {
-                              exact: !1
-                            },
-                      e = _ref4.exact;
-
-                    var n = Object(r.b)(this._nodes, "state", t, e)[0];
-                    return new i(n, this._nodes);
-                  }
-                }
-              ]);
-
-              return i;
-            })(_wrapNativeSuper(Object));
-
-          var c =
-            /*#__PURE__*/
-            (function() {
-              function c(t, e) {
-                _classCallCheck(this, c);
-
-                (this.selectors = t
-                  .split(" ")
-                  .filter(function(t) {
-                    return !!t;
-                  })
-                  .map(function(t) {
-                    return t.trim();
-                  })),
+                ]),
+                n
+              );
+            })(b()(Object)),
+            w = (function() {
+              function t(n, e) {
+                u()(this, t),
+                  (this.selectors = n
+                    .split(" ")
+                    .filter(function(t) {
+                      return !!t;
+                    })
+                    .map(function(t) {
+                      return t.trim();
+                    })),
                   (this.rootComponent = e),
-                  (this.tree = Object(r.a)(this.rootComponent));
+                  (this.tree = Object(v.a)(this.rootComponent));
               }
-
-              _createClass(c, [
-                {
-                  key: "find",
-                  value: function find() {
-                    return (
-                      (this.nodes = new o(
-                        Object(r.d)(this.selectors, this.tree, !0)
-                      )),
-                      new i(this.nodes[0], this.nodes)
-                    );
+              return (
+                f()(t, [
+                  {
+                    key: "find",
+                    value: function() {
+                      return (
+                        (this.nodes = new g(
+                          Object(v.d)(this.selectors, this.tree, !0)
+                        )),
+                        new m(this.nodes[0], this.nodes)
+                      );
+                    }
+                  },
+                  {
+                    key: "findAll",
+                    value: function() {
+                      return new g(Object(v.d)(this.selectors, this.tree));
+                    }
                   }
-                },
-                {
-                  key: "findAll",
-                  value: function findAll() {
-                    return new o(Object(r.d)(this.selectors, this.tree));
-                  }
-                }
-              ]);
-
-              return c;
+                ]),
+                t
+              );
             })();
         },
-        function(t, e, n) {
+        function(t, n) {
+          t.exports = function(t, n, e) {
+            return (
+              n in t
+                ? Object.defineProperty(t, n, {
+                    value: e,
+                    enumerable: !0,
+                    configurable: !0,
+                    writable: !0
+                  })
+                : (t[n] = e),
+              t
+            );
+          };
+        },
+        function(t, n, e) {
           "use strict";
-
           var r = Array.isArray,
             o = Object.keys,
             i = Object.prototype.hasOwnProperty;
-
-          t.exports = function t(e, n) {
-            if (e === n) return !0;
-
-            if (e && n && "object" == _typeof(e) && "object" == _typeof(n)) {
-              var c,
-                u,
-                s,
-                a = r(e),
-                f = r(n);
-
-              if (a && f) {
-                if ((u = e.length) != n.length) return !1;
-
-                for (c = u; 0 != c--; ) {
-                  if (!t(e[c], n[c])) return !1;
-                }
-
+          t.exports = function t(n, e) {
+            if (n === e) return !0;
+            if (n && e && "object" == typeof n && "object" == typeof e) {
+              var u,
+                c,
+                f,
+                a = r(n),
+                s = r(e);
+              if (a && s) {
+                if ((c = n.length) != e.length) return !1;
+                for (u = c; 0 != u--; ) if (!t(n[u], e[u])) return !1;
                 return !0;
               }
-
-              if (a != f) return !1;
-
-              var d = _instanceof(e, Date),
-                l = _instanceof(n, Date);
-
-              if (d != l) return !1;
-              if (d && l) return e.getTime() == n.getTime();
-
-              var p = _instanceof(e, RegExp),
-                h = _instanceof(n, RegExp);
-
-              if (p != h) return !1;
-              if (p && h) return e.toString() == n.toString();
-              var y = o(e);
-              if ((u = y.length) !== o(n).length) return !1;
-
-              for (c = u; 0 != c--; ) {
-                if (!i.call(n, y[c])) return !1;
-              }
-
-              for (c = u; 0 != c--; ) {
-                if (!t(e[(s = y[c])], n[s])) return !1;
-              }
-
+              if (a != s) return !1;
+              var l = n instanceof Date,
+                p = e instanceof Date;
+              if (l != p) return !1;
+              if (l && p) return n.getTime() == e.getTime();
+              var d = n instanceof RegExp,
+                y = e instanceof RegExp;
+              if (d != y) return !1;
+              if (d && y) return n.toString() == e.toString();
+              var h = o(n);
+              if ((c = h.length) !== o(e).length) return !1;
+              for (u = c; 0 != u--; ) if (!i.call(e, h[u])) return !1;
+              for (u = c; 0 != u--; ) if (!t(n[(f = h[u])], e[f])) return !1;
               return !0;
             }
-
-            return e != e && n != n;
+            return n != n && e != e;
           };
         },
-        function(t, e, n) {
+        function(t, n, e) {
           "use strict";
-
-          n.r(e),
+          e.r(n),
             function(t) {
-              n.d(e, "resq$", function() {
-                return u;
+              e.d(n, "resqT", function() {
+                return c;
               }),
-                n.d(e, "resq$$", function() {
-                  return s;
+                e.d(n, "resqTT", function() {
+                  return f;
                 });
-              var r = n(3),
-                o = n(2);
-              n.d(e, "waitToLoadReact", function() {
+              var r = e(12),
+                o = e(11);
+              e.d(n, "waitToLoadReact", function() {
                 return o.a;
               });
-              var i = n(0);
-
-              function c(e, n, o) {
+              var i = e(0);
+              function u(n, e, o) {
                 if (!o && !t.isReactLoaded)
                   throw new Error(
                     "Could not find the root element of your application"
                   );
-                var c = t.rootReactElement;
-                if ((_instanceof(o, HTMLElement) && (c = Object(i.c)(o)), !c))
+                var u = t.rootReactElement;
+                if ((o instanceof HTMLElement && (u = Object(i.c)(o)), !u))
                   throw new Error(
                     "Could not find instance of React in given element"
                   );
-                return new r.a(e, c)[n]();
+                return new r.a(n, u)[e]();
               }
-
-              function u(t, e) {
-                return c(t, "find", e);
+              function c(t, n) {
+                return u(t, "find", n);
               }
-
-              function s(t, e) {
-                return c(t, "findAll", e);
+              function f(t, n) {
+                return u(t, "findAll", n);
               }
-            }.call(this, n(1));
+            }.call(this, e(10));
+        },
+        function(t, n) {
+          t.exports = function(t) {
+            if (Array.isArray(t)) {
+              for (var n = 0, e = new Array(t.length); n < t.length; n++)
+                e[n] = t[n];
+              return e;
+            }
+          };
+        },
+        function(t, n) {
+          t.exports = function(t) {
+            if (
+              Symbol.iterator in Object(t) ||
+              "[object Arguments]" === Object.prototype.toString.call(t)
+            )
+              return Array.from(t);
+          };
+        },
+        function(t, n) {
+          t.exports = function() {
+            throw new TypeError(
+              "Invalid attempt to spread non-iterable instance"
+            );
+          };
+        },
+        function(t, n) {
+          t.exports = function(t) {
+            if (void 0 === t)
+              throw new ReferenceError(
+                "this hasn't been initialised - super() hasn't been called"
+              );
+            return t;
+          };
+        },
+        function(t, n) {
+          t.exports = function(t) {
+            return -1 !== Function.toString.call(t).indexOf("[native code]");
+          };
+        },
+        function(t, n, e) {
+          var r = e(6);
+          function o() {
+            if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+            if (Reflect.construct.sham) return !1;
+            if ("function" == typeof Proxy) return !0;
+            try {
+              return (
+                Date.prototype.toString.call(
+                  Reflect.construct(Date, [], function() {})
+                ),
+                !0
+              );
+            } catch (t) {
+              return !1;
+            }
+          }
+          function i(n, e, u) {
+            return (
+              o()
+                ? (t.exports = i = Reflect.construct)
+                : (t.exports = i = function(t, n, e) {
+                    var o = [null];
+                    o.push.apply(o, n);
+                    var i = new (Function.bind.apply(t, o))();
+                    return e && r(i, e.prototype), i;
+                  }),
+              i.apply(null, arguments)
+            );
+          }
+          t.exports = i;
         }
       ]);
     });
@@ -967,7 +824,7 @@ exports.onPrepare = function() {
     var resq = "resq";
     rootElement = rootElement || "#root";
     document.execCommand(window[resq].waitToLoadReact(rootElement));
-    var elements = window[resq].resq$$(
+    var elements = window[resq].resqTT(
       component,
       document.querySelector(rootElement)
     );
