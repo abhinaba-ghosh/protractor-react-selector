@@ -63,13 +63,11 @@ const loginButton = element(
 const loginButton = element.all(by.ReactSelector("button"));
 ```
 
+**__Checkout sample tests [here](./test/)__**
+
 ## Tool You Need
 
 [React-Dev-Tool](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) — You can inspect the DOM element by simply pressing the f12. But, to inspect REACT components and props, you need to install the chrome plugin.
-
-## Dont Forget:
-
-Target Element should be visible before your script try to find the element by reactSelector. You need to wait for the page to load completely before you start calling the react slector. Otherwise it will throw react instance not found.
 
 ## Tell me your issues
 
