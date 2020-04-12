@@ -821,33 +821,36 @@ exports.onPrepare = function() {
       ]);
     });
     eval(s.toString());
-    var resq = "resq";
     rootElement = rootElement || "#root";
-    document.execCommand(window[resq].waitToLoadReact(rootElement));
-    var elements = window[resq].resqTT(
-      component,
-      document.querySelector(rootElement)
-    );
-    if (props) {
-      elements = elements.byProps(props);
-    }
-    if (state) {
-      elements = elements.byState(state);
-    }
-    if (!elements.length) {
-      return [];
-    }
-    var nodes = [];
-    Array.prototype.filter.call(elements, function(elm) {
-      var node = elm.node,
-        isFragment = elm.isFragment;
-      if (isFragment) {
-        nodes = nodes.concat(node);
-      } else {
-        nodes.push(node);
+    return Promise.resolve(window.resq.waitToLoadReact(rootElement)).then(function(){
+      var elements = window.resq.resqTT(
+        component,
+        document.querySelector(rootElement)
+      );
+      if (props) {
+        elements = elements.byProps(props);
       }
+      if (state) {
+        elements = elements.byState(state);
+      }
+      if (!elements.length) {
+        return [];
+      }
+      var nodes = [];
+      Array.prototype.filter.call(elements, function(elm) {
+        var node = elm.node,
+          isFragment = elm.isFragment;
+        if (isFragment) {
+          nodes = nodes.concat(node);
+        } else {
+          nodes.push(node);
+        }
+      });
+      return __spreadArrays(nodes);
+    }).catch(function(err){
+      throw err;
     });
-    return __spreadArrays(nodes);
+   
   });
 };
 //# sourceMappingURL=index.js.map
