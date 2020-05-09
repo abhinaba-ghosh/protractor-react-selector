@@ -1,38 +1,39 @@
 {
-	"name": "protractor-react-selector",
-	"version": "2.2.0",
-	"description": "React Locator Selector for Protractor",
-	"main": "./index.js",
-	"scripts": {
-		"driver:update": "webdriver-manager update --ignore_ssl",
-		"test:chrome": "protractor test/chrome.conf.js",
-		"test:firefox": "protractor test/gecko.conf.js",
-		"debug": "node --inspect-brk bin/protractor test/conf.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/abhinaba1080/protractor-react-selector.git"
-	},
-	"keywords": [
-		"plugin",
-		"protractor",
-		"custom-locator",
-		"react",
-		"props",
-		"react-selector",
-		"protractor-react-selector",
-		"protractor-react-plugin"
-	],
-	"author": "Abhinaba Ghosh <askabhinaba@gmail.com>",
-	"license": "MIT",
-	"dependencies": {
-		"resq": "^1.7.1"
-	},
-	"devDependencies": {
-		"@types/node": "^12.11.1",
-		"protractor": "^5.3.1",
-		"jasmine": "^3.5.0",
-		"typescript": "^3.6.4",
-		"axios-retry": "^3.1.2"
-	}
+  "name": "protractor-react-selector",
+  "version": "2.2.1",
+  "description": "React Locator Selector for Protractor",
+  "main": "./index.js",
+  "scripts": {
+    "driver:update": "webdriver-manager update --ignore_ssl",
+    "test:chrome": "protractor test/chrome.conf.js",
+    "test:firefox": "protractor test/gecko.conf.js",
+    "test": "npm run driver:update && npm run test:chrome && npm run test:firefox",
+    "debug": "node --inspect-brk bin/protractor test/conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhinaba1080/protractor-react-selector.git"
+  },
+  "keywords": [
+    "plugin",
+    "protractor",
+    "custom-locator",
+    "react",
+    "props",
+    "react-selector",
+    "protractor-react-selector",
+    "protractor-react-plugin"
+  ],
+  "author": "Abhinaba Ghosh <askabhinaba@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "resq": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "protractor": "^5.3.1",
+    "jasmine": "^3.5.0",
+    "typescript": "^3.6.4",
+    "axios-retry": "^3.1.2"
+  }
 }

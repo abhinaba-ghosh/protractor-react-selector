@@ -28,14 +28,14 @@ _protractor-react-selector_ can be used as a plugin in your protractor configura
 
 ```typescript
 exports.config = {
-	// ... the rest of your config
-	plugins: [
-		{
-			// The module name
-			package: 'protractor-react-selector',
-		},
-	],
-};
+  // ... the rest of your config
+  plugins: [
+    {
+      // The module name
+      package: 'protractor-react-selector'
+    }
+  ]
+}
 ```
 
 ## How to use React Selector?
@@ -46,47 +46,73 @@ Lets take this example REACT APP:
 // imports
 
 const MyComponent = ({ someBooleanProp }) => (
-	<div>My Component {someBooleanProp ? 'show this' : ''} </div>
-);
+  <div>My Component {someBooleanProp ? 'show this' : ''} </div>
+)
 
 const App = () => (
-	<div>
-		<MyComponent />
-		<MyComponent someBooleanProp={true} />
-	</div>
-);
+  <div>
+    <MyComponent />
+    <MyComponent someBooleanProp={true} />
+  </div>
+)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Once you are set with the configuration, you can use the react selector just like any other native locator.
+#### Wait for application to be ready to run tests
 
-> Format: **by.react(componentName,props,state,reactRootElement)**
+To wait until the React's component tree is loaded, add the `waitForReact` method to fixture's `before` hook.
 
-- componentName : string - required
-- props : JSON OBJ (optional)
-- state : JSON OBJ (optional)
-- reactRootElement : string (optional)
+```ts
+await browser.waitForReact(timeOut?:number=10000, reactRoot?:string='#root')
+```
+
+```js
+beforeAll(() => {
+  cy.visit('http://localhost:3000/myApp')
+   await browser.waitForReact()
+})
+```
+
+this will wait to load react inside your app. By-default it will assume that the react root is set to '#root'. In the example above the id of the root element is set to 'root'. So, you don't need to pass the the root selector
+
+The default timeout for `waitForReact` is `10000` ms. You can specify a custom timeout value:
+
+```js
+await browser.waitForReact(30000)
+```
+
+#### Wait to Load React for different react roots
+
+It is always not true that the root of React app is set to 'root', may be your root element is 'mount', like:
+
+```js
+const App = () => (
+  <div id='mount'>
+    <MyComponent />
+    <MyComponent someBooleanProp={true} />
+  </div>
+)
+```
+
+There is some application which displays react components asynchronously. The cypress-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
+
+```ts
+// if your react root is set to different selector other than 'root'
+// then you don't need to pass root element information
+await browser.waitForReact(10000, '#mount')
+```
+
+#### Find Element by React Component
+
+You should have [React Develop Tool](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) installed to spy and find out the component name as sometimes components can go though modifications. Once the React gets loaded, you can easily identify an web element by react component name:
 
 ```ts
 // with only component. If you don't provide any root element, it assume that root is set to '#root'
-const myElement = element(by.react('MyComponent'));
+const myElement = element(by.react('MyComponent'))
 
 // to fetch all elements matched with component, props and state, you can use protractor native 'all' method
-const myElement = element.all(by.react('MyComponent'));
-```
-
-#### Identify Element with different React root
-
-It is always true that the root of React app is set to 'root', may be your root element is 'mount'. There is some application which displays react components asynchronously. The protractor-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
-
-```ts
-// if your react root is set to 'root', then you don't need to pass root element information
-const myElement = element(by.react('MyComponent'));
-
-// if your react root is set to different selector other than 'root'
-// then you don't need to pass root element information
-const myElement = element(by.react('MyComponent', {}, {}, '#mount'));
+const myElement = element.all(by.react('MyComponent'))
 ```
 
 #### Element filtration by Props and States
@@ -95,8 +121,8 @@ You can filter the REACT components by its props and states like below:
 
 ```ts
 const myElement = element(
-	by.react('MyComponent', { someBooleanProp: true }, { someBooleanState: true })
-);
+  by.react('MyComponent', { someBooleanProp: true }, { someBooleanState: true })
+)
 ```
 
 #### Wildcard selection
@@ -105,10 +131,10 @@ You can select your components by partial name use a wildcard selectors:
 
 ```ts
 // Partial Match
-const myElement = element(by.react('My*', { someBooleanProp: true }));
+const myElement = element(by.react('My*', { someBooleanProp: true }))
 
 // Entire Match
-const myElement = element(by.react('*', { someBooleanProp: true })); // return all components matched with the prop
+const myElement = element(by.react('*', { someBooleanProp: true })) // return all components matched with the prop
 ```
 
 ## Sample Tests
