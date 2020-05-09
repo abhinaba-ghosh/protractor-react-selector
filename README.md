@@ -4,7 +4,7 @@ ReactJS is one of the most widely use Front-End libraries in the web. Along side
 
 Worry Not! Here We Introduce **Protractor-React-Selector** :hatching_chick:
 
-_protractor-react-selector_ is lightweight plugin to help you to locate web elements in your REACT app using props and states.
+_protractor-react-selector_ is lightweight plugin to help you to locate web elements in your REACT app using props and states.Internally, protractor-react-selector uses a library called [resq](https://github.com/baruchvlz/resq) to query React's VirtualDOM in order to retrieve the nodes.
 
 Read complete setup Blog [here](https://medium.com/@abhinabaghosh.1994/test-your-react-app-efficiently-with-protractor-b8406db9148f)
 
