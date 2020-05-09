@@ -69,7 +69,7 @@ await browser.waitForReact(timeOut?:number=10000, reactRoot?:string='#root')
 
 ```js
 beforeAll(() => {
-  cy.visit('http://localhost:3000/myApp')
+   await browser.get('http://localhost:3000/myApp')
    await browser.waitForReact()
 })
 ```
@@ -95,7 +95,7 @@ const App = () => (
 )
 ```
 
-There is some application which displays react components asynchronously. The cypress-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
+There is some application which displays react components asynchronously. The protractor-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
 
 ```ts
 // if your react root is set to different selector other than 'root'
