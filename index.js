@@ -21,9 +21,6 @@
   return (module.exports = {
     //initialize the resq script
     name: 'protractor-react-selector',
-    onPageLoad: function () {
-      browser.executeScript(resqScript.toString())
-    },
 
     // initialize the reactSelector custom locator
     onPrepare: function () {
@@ -63,6 +60,7 @@
       })
 
       global.browser.waitForReact = (timeout = 10000, reactRoot = '#root') => {
+        browser.executeScript(resqScript.toString())
         return browser.executeScript(
           (timeout, reactRoot) => {
             return Promise.resolve(
