@@ -16,11 +16,21 @@ Install this module locally with the following command to be used as a (dev-)dep
 npm install --save protractor-react-selector
 ```
 
+## TSConfig settings for type definition
+
+```js
+{
+  "compilerOptions": {
+    "sourceType": "module",
+    "types": ["node", "protractor-react-selector"]
+  }
+}
+```
+
 ## Alert
 
 - protractor-react-selector supports NodeJS 8 or higher
-- Support added for IE, Chrome, Firefox, Safari (IE can break for some complex components)
-- From version 2.2.0, (by.ReactSelector(...)) is changed to (by.react(....))
+- cypress-react-selector supports NodeJS 8 or higher
 
 ## Configuration
 
@@ -32,10 +42,10 @@ exports.config = {
   plugins: [
     {
       // The module name
-      package: 'protractor-react-selector'
-    }
-  ]
-}
+      package: 'protractor-react-selector',
+    },
+  ],
+};
 ```
 
 ## How to use React Selector?
@@ -47,16 +57,16 @@ Lets take this example REACT APP:
 
 const MyComponent = ({ someBooleanProp }) => (
   <div>My Component {someBooleanProp ? 'show this' : ''} </div>
-)
+);
 
 const App = () => (
   <div>
     <MyComponent />
     <MyComponent someBooleanProp={true} />
   </div>
-)
+);
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 #### Wait for application to be ready to run tests
@@ -79,7 +89,7 @@ this will wait to load react inside your app. By-default it will assume that the
 The default timeout for `waitForReact` is `10000` ms. You can specify a custom timeout value:
 
 ```js
-await browser.waitForReact(30000)
+await browser.waitForReact(30000);
 ```
 
 #### Wait to Load React for different react roots
@@ -88,11 +98,11 @@ It is always not true that the root of React app is set to 'root', may be your r
 
 ```js
 const App = () => (
-  <div id='mount'>
+  <div id="mount">
     <MyComponent />
     <MyComponent someBooleanProp={true} />
   </div>
-)
+);
 ```
 
 There is some application which displays react components asynchronously. The protractor-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
@@ -100,7 +110,7 @@ There is some application which displays react components asynchronously. The pr
 ```ts
 // if your react root is set to different selector other than 'root'
 // then you don't need to pass root element information
-await browser.waitForReact(10000, '#mount')
+await browser.waitForReact(10000, '#mount');
 ```
 
 #### Find Element by React Component
@@ -109,10 +119,10 @@ You should have [React Develop Tool](https://chrome.google.com/webstore/detail/r
 
 ```ts
 // with only component. If you don't provide any root element, it assume that root is set to '#root'
-const myElement = element(by.react('MyComponent'))
+const myElement = element(by.react('MyComponent'));
 
 // to fetch all elements matched with component, props and state, you can use protractor native 'all' method
-const myElement = element.all(by.react('MyComponent'))
+const myElement = element.all(by.react('MyComponent'));
 ```
 
 #### Element filtration by Props and States
@@ -122,7 +132,7 @@ You can filter the REACT components by its props and states like below:
 ```ts
 const myElement = element(
   by.react('MyComponent', { someBooleanProp: true }, { someBooleanState: true })
-)
+);
 ```
 
 #### Wildcard selection
@@ -131,10 +141,10 @@ You can select your components by partial name use a wildcard selectors:
 
 ```ts
 // Partial Match
-const myElement = element(by.react('My*', { someBooleanProp: true }))
+const myElement = element(by.react('My*', { someBooleanProp: true }));
 
 // Entire Match
-const myElement = element(by.react('*', { someBooleanProp: true })) // return all components matched with the prop
+const myElement = element(by.react('*', { someBooleanProp: true })); // return all components matched with the prop
 ```
 
 ## Sample Tests
