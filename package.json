@@ -6,8 +6,7 @@
   "scripts": {
     "driver:update": "webdriver-manager update --ignore_ssl",
     "test:chrome": "protractor test/chrome.conf.js",
-    "test:firefox": "protractor test/gecko.conf.js",
-    "test": "npm run driver:update && npm run test:chrome && npm run test:firefox",
+    "test": "npm run driver:update && npm run test:chrome",
     "debug": "node --inspect-brk bin/protractor test/conf.js"
   },
   "repository": {

@@ -59,7 +59,7 @@
         return __spreadArrays(nodes);
       });
 
-      global.browser.waitForReact = (timeout = 10000, reactRoot = '#root') => {
+      global.browser.waitForReact = (timeout = 10000, reactRoot) => {
         return browser.executeScript(resqScript.toString()).then(() => {
           return browser.executeScript(
             ([timeout, reactRoot]) => {
