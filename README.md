@@ -1,4 +1,7 @@
-## What can it do?
+# Protractor-React-Selector
+
+[![Build Status](https://circleci.com/gh/abhinaba-ghosh/protractor-react-selector.svg?style=shield&branch-=master)](https://app.circleci.com/pipelines/github/abhinaba-ghosh/protractor-react-selector)
+[![NPM release](https://img.shields.io/npm/v/protractor-react-selector.svg 'NPM release')](https://www.npmjs.com/package/protractor-react-selector)
 
 ReactJS is one of the most widely use Front-End libraries in the web. Along side React, many developers use styling tools that will minify or re-write the class attribute values attached to the HTML elements via className props in JSX. These modifications and overwrites make it difficult to select the generated HTML using the WebDriver's query commands like findElement or findElements since it's not guaranteed that the class name will remain the same.
 
@@ -84,9 +87,9 @@ beforeAll(() => {
 })
 ```
 
-this will wait to load react inside your app. By-default it will assume that the react root is set to '#root'. In the example above the id of the root element is set to 'root'. So, you don't need to pass the the root selector
+this will wait to load react inside your app. waitForReact automatically find out the react root of your application.
 
-The default timeout for `waitForReact` is `10000` ms. You can specify a custom timeout value:
+The default timeout for waitForReact is `10000` ms. You can specify a custom timeout value:
 
 ```js
 await browser.waitForReact(30000);
@@ -94,7 +97,7 @@ await browser.waitForReact(30000);
 
 #### Wait to Load React for different react roots
 
-It is always not true that the root of React app is set to 'root', may be your root element is 'mount', like:
+It may even possible that you have different REACT roots (different REACT instances in same application). In this case, you can specify the `CSS Selector` of the target root.
 
 ```js
 const App = () => (
@@ -105,7 +108,7 @@ const App = () => (
 );
 ```
 
-There is some application which displays react components asynchronously. The protractor-react-selector by-default assumes the react root element is set to 'root', if you have different root element, you need to pass that information to the react selector.
+There is some application which displays react components asynchronously. You need to pass root selector information to the react selector.
 
 ```ts
 // if your react root is set to different selector other than 'root'
