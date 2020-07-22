@@ -1,7 +1,21 @@
-build-and-test:
-  docker:
-    - image: circleci/node:12-browsers
-  working_directory: ~/test
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10-browsers
+
+  working_directory: ~/repo
+
   steps:
-    - run: npm i
-    - run: npm run test
+    - checkout
+
+    - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
+
+    - run:
+        name: Install
+        command: npm install
+
+    - run:
+      name: test
+      command: npm run test
