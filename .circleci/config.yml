@@ -1,21 +1,6 @@
 build-and-test:
   docker:
     - image: circleci/node:8.9-stretch-browsers
-  working_directory: ~/test
   steps:
-    - checkout
-    # https://github.com/sstephenson/bats/issues/229
-    - run: curl -Lo- "https://raw.githubusercontent.com/bpkg/bpkg/master/setup.sh" | sudo bash
-    - run: sudo bpkg install -g sstephenson/bats
-
-    - run: mkdir ~/bin
-    - run: |
-        curl -L -o ~/bin/jq \
-        https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
-        chmod +x ~/bin/jq
     - run: npm i
     - run: npm run test
-    - save_cache:
-        key: v1-web-dev-{{ .Branch }}-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
